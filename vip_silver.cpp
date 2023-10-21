@@ -103,9 +103,9 @@ bool MiniVIP::LoadVips(char* error, size_t maxlen)
 	KeyValues* pKVConfig = new KeyValues("VIPSilver");
 	KeyValues::AutoDelete autoDelete(pKVConfig);
 	
-	if (!pKVConfig->LoadFromFile(g_pFullFileSystem, "addons/mini_vip/vip_silver.ini"))
+	if (!pKVConfig->LoadFromFile(g_pFullFileSystem, "addons/vip_silver/vip_silver.ini"))
 	{
-		V_strncpy(error, "Failed to load vip config 'addons/mini_vip/vip_silver.ini'", maxlen);
+		V_strncpy(error, "Failed to load vip config 'addons/vip_silver/vip_silver.ini'", maxlen);
 		return false;
 	}
 
