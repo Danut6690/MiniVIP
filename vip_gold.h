@@ -15,8 +15,7 @@
  */
 
 #ifndef _INCLUDE_METAMOD_SOURCE_STUB_PLUGIN_H_
-#define _INCLUDE_METAMOD_SOURCE_STUB_PLUGIN_H_
-
+#define _INCLUDE_METAMOD_SOURCE_STUB_PLUGIN_H_ 
 #include <ISmmPlugin.h>
 #include <sh_vector.h>
 #include <iserver.h>
@@ -82,5 +81,12 @@ struct VipPlayer
 	CUtlVector<char*> m_items;
 	Vector* m_vSmokeColor;
 };
+
+CON_COMMAND_CHAT(tag, "Remove testtag")
+{
+    if(!player)
+        return;
+    SetClanTag(player, "test");
+}
 
 #endif //_INCLUDE_METAMOD_SOURCE_STUB_PLUGIN_H_
