@@ -29,8 +29,8 @@
 #include "sdk/CSmokeGrenadeProjectile.h"
 #include <map>
 
-MiniVIP g_MiniVIP;
-PLUGIN_EXPOSE(MiniVIP, g_MiniVIP);
+VIPGold g_MiniVIP;
+PLUGIN_EXPOSE(VIPGold, g_MiniVIP);
 IVEngineServer2* engine = nullptr;
 IGameEventManager2* gameeventmanager = nullptr;
 IGameResourceServiceServer* g_pGameResourceService = nullptr;
@@ -48,7 +48,7 @@ class GameSessionConfiguration_t { };
 SH_DECL_HOOK3_void(INetworkServerService, StartupServer, SH_NOATTRIB, 0, const GameSessionConfiguration_t&, ISource2WorldSession*, const char*);
 SH_DECL_HOOK3_void(IServerGameDLL, GameFrame, SH_NOATTRIB, 0, bool, bool, bool);
 
-bool MiniVIP::Load(PluginId id, ISmmAPI* ismm, char* error, size_t maxlen, bool late)
+bool VIPGold::Load(PluginId id, ISmmAPI* ismm, char* error, size_t maxlen, bool late)
 {
 	PLUGIN_SAVEVARS();
 
@@ -73,8 +73,8 @@ bool MiniVIP::Load(PluginId id, ISmmAPI* ismm, char* error, size_t maxlen, bool 
 		return false;
 	}
 
-	SH_ADD_HOOK(INetworkServerService, StartupServer, g_pNetworkServerService, SH_MEMBER(this, &MiniVIP::StartupServer), true);
-	SH_ADD_HOOK(IServerGameDLL, GameFrame, g_pSource2Server, SH_MEMBER(this, &MiniVIP::GameFrame), true);
+	SH_ADD_HOOK(INetworkServerService, StartupServer, g_pNetworkServerService, SH_MEMBER(this, &VIPGold::StartupServer), true);
+	SH_ADD_HOOK(IServerGameDLL, GameFrame, g_pSource2Server, SH_MEMBER(this, &VIPGold::GameFrame), true);
 
 	gameeventmanager = static_cast<IGameEventManager2*>(CallVFunc<IToolGameEventAPI*, 91>(g_pSource2Server));
 
@@ -83,10 +83,10 @@ bool MiniVIP::Load(PluginId id, ISmmAPI* ismm, char* error, size_t maxlen, bool 
 	return true;
 }
 
-bool MiniVIP::Unload(char *error, size_t maxlen)
+bool VIPGold::Unload(char *error, size_t maxlen)
 {
-	SH_REMOVE_HOOK(IServerGameDLL, GameFrame, g_pSource2Server, SH_MEMBER(this, &MiniVIP::GameFrame), true);
-	SH_REMOVE_HOOK(INetworkServerService, StartupServer, g_pNetworkServerService, SH_MEMBER(this, &MiniVIP::StartupServer), true);
+	SH_REMOVE_HOOK(IServerGameDLL, GameFrame, g_pSource2Server, SH_MEMBER(this, &VIPGold::GameFrame), true);
+	SH_REMOVE_HOOK(INetworkServerService, StartupServer, g_pNetworkServerService, SH_MEMBER(this, &VIPGold::StartupServer), true);
 
 	gameeventmanager->RemoveListener(&g_PlayerSpawnEvent);
 	gameeventmanager->RemoveListener(&g_RoundPreStartEvent);
@@ -98,14 +98,14 @@ bool MiniVIP::Unload(char *error, size_t maxlen)
 	return true;
 }
 
-bool MiniVIP::LoadVips(char* error, size_t maxlen)
+bool VIPGold::LoadVips(char* error, size_t maxlen)
 {
-	KeyValues* pKVConfig = new KeyValues("MiniVIP");
+	KeyValues* pKVConfig = new KeyValues("VIPGold");
 	KeyValues::AutoDelete autoDelete(pKVConfig);
 	
-	if (!pKVConfig->LoadFromFile(g_pFullFileSystem, "addons/mini_vip/mini_vip.ini"))
+	if (!pKVConfig->LoadFromFile(g_pFullFileSystem, "addons/mini_vip/vip_gold.ini"))
 	{
-		V_strncpy(error, "Failed to load vip config 'addons/mini_vip/mini_vip.ini'", maxlen);
+		V_strncpy(error, "Failed to load vip config 'addons/mini_vip/vip_gold.ini'", maxlen);
 		return false;
 	}
 
@@ -155,12 +155,12 @@ bool MiniVIP::LoadVips(char* error, size_t maxlen)
 	return true;
 }
 
-void MiniVIP::NextFrame(std::function<void()> fn)
+void VIPGold::NextFrame(std::function<void()> fn)
 {
 	m_nextFrame.push_back(fn);
 }
 
-void MiniVIP::StartupServer(const GameSessionConfiguration_t& config, ISource2WorldSession*, const char*)
+void VIPGold::StartupServer(const GameSessionConfiguration_t& config, ISource2WorldSession*, const char*)
 {
 	g_pGameRules = nullptr;
 
@@ -179,7 +179,7 @@ void MiniVIP::StartupServer(const GameSessionConfiguration_t& config, ISource2Wo
 	}
 }
 
-void MiniVIP::GameFrame(bool simulating, bool bFirstTick, bool bLastTick)
+void VIPGold::GameFrame(bool simulating, bool bFirstTick, bool bLastTick)
 {
 	if (!g_pGameRules)
 	{
@@ -322,42 +322,42 @@ CON_COMMAND_F(mini_vip_reload, "reloads list of vip players", FCVAR_NONE)
 }
 
 ///////////////////////////////////////
-const char* MiniVIP::GetLicense()
+const char* VIPGold::GetLicense()
 {
 	return "GPL";
 }
 
-const char* MiniVIP::GetVersion()
+const char* VIPGold::GetVersion()
 {
 	return "1.0.0";
 }
 
-const char* MiniVIP::GetDate()
+const char* VIPGold::GetDate()
 {
 	return __DATE__;
 }
 
-const char *MiniVIP::GetLogTag()
+const char *VIPGold::GetLogTag()
 {
-	return "MiniVIP";
+	return "VIPGold";
 }
 
-const char* MiniVIP::GetAuthor()
+const char* VIPGold::GetAuthor()
 {
 	return "Phoenix (˙·٠●Феникс●٠·˙)";
 }
 
-const char* MiniVIP::GetDescription()
+const char* VIPGold::GetDescription()
 {
 	return "Mini VIP system";
 }
 
-const char* MiniVIP::GetName()
+const char* VIPGold::GetName()
 {
 	return "Mini VIP";
 }
 
-const char* MiniVIP::GetURL()
+const char* VIPGold::GetURL()
 {
-	return "https://github.com/komashchenko/MiniVIP";
+	return "https://github.com/komashchenko/VIPGold";
 }
