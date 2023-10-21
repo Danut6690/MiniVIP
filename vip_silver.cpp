@@ -15,7 +15,7 @@
  */
 
 #include <stdio.h>
-#include "vip_silver.h"
+#include "vip_gold.h"
 #include "metamod_oslink.h"
 #include "utils.hpp"
 #include <utlstring.h>
@@ -100,12 +100,12 @@ bool MiniVIP::Unload(char *error, size_t maxlen)
 
 bool MiniVIP::LoadVips(char* error, size_t maxlen)
 {
-	KeyValues* pKVConfig = new KeyValues("VIPSilver");
+	KeyValues* pKVConfig = new KeyValues("VIPGold");
 	KeyValues::AutoDelete autoDelete(pKVConfig);
 	
-	if (!pKVConfig->LoadFromFile(g_pFullFileSystem, "addons/vip_silver/vip_silver.ini"))
+	if (!pKVConfig->LoadFromFile(g_pFullFileSystem, "addons/vip_gold/vip_gold.ini"))
 	{
-		V_strncpy(error, "Failed to load vip config 'addons/vip_silver/vip_silver.ini'", maxlen);
+		V_strncpy(error, "Failed to load vip config 'addons/vip_gold/vip_gold.ini'", maxlen);
 		return false;
 	}
 
@@ -306,7 +306,7 @@ void CEntityListener::OnEntitySpawned(CEntityInstance* pEntity)
 	});
 }
 
-CON_COMMAND_F(vip_silver_reload, "reloads list of vip players", FCVAR_NONE)
+CON_COMMAND_F(vip_gold_reload, "reloads list of vip players", FCVAR_NONE)
 {
 	g_VipPlayers.clear();
 	

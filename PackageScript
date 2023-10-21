@@ -36,4 +36,4 @@ for task in MMSPlugin.binaries:
 
 builder.AddCopy(os.path.join(builder.buildPath, MMSPlugin.plugin_name + '.vdf'), metamod_folder)
 
-builder.AddCopy(os.path.join(builder.sourcePath, 'vip_silver.ini'), os.path.join('addons', MMSPlugin.plugin_name, 'vip_silver.ini'))
+builder.AddCopy(os.path.join(builder.sourcePath, 'vip_gold.ini'), os.path.join('addons', MMSPlugin.plugin_name, 'vip_gold.ini'))
