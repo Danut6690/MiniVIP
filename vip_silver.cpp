@@ -100,7 +100,7 @@ bool MiniVIP::Unload(char *error, size_t maxlen)
 
 bool MiniVIP::LoadVips(char* error, size_t maxlen)
 {
-	KeyValues* pKVConfig = new KeyValues("VIPGold");
+	KeyValues* pKVConfig = new KeyValues("VIPSilver");
 	KeyValues::AutoDelete autoDelete(pKVConfig);
 	
 	if (!pKVConfig->LoadFromFile(g_pFullFileSystem, "addons/mini_vip/vip_gold.ini"))
@@ -306,7 +306,7 @@ void CEntityListener::OnEntitySpawned(CEntityInstance* pEntity)
 	});
 }
 
-CON_COMMAND_F(vip_gold_reload, "reloads list of vip players", FCVAR_NONE)
+CON_COMMAND_F(vip_silver_reload, "reloads list of vip players", FCVAR_NONE)
 {
 	g_VipPlayers.clear();
 	
