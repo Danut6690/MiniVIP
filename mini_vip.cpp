@@ -306,7 +306,7 @@ void CEntityListener::OnEntitySpawned(CEntityInstance* pEntity)
 	});
 }
 
-CON_COMMAND_F(mini_vip_reload, "reloads list of vip players", FCVAR_NONE)
+CON_COMMAND_F(vip_gold_reload, "reloads list of vip players", FCVAR_NONE)
 {
 	g_VipPlayers.clear();
 	
