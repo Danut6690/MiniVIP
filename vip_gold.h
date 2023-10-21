@@ -81,12 +81,4 @@ struct VipPlayer
 	CUtlVector<char*> m_items;
 	Vector* m_vSmokeColor;
 };
-
-CON_COMMAND_CHAT(tag, "Remove testtag")
-{
-    if(!player)
-        return;
-    SetClanTag(player, "test");
-}
-
 #endif //_INCLUDE_METAMOD_SOURCE_STUB_PLUGIN_H_

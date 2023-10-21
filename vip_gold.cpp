@@ -306,6 +306,13 @@ void CEntityListener::OnEntitySpawned(CEntityInstance* pEntity)
 	});
 }
 
+CON_COMMAND_CHAT(tag, "Remove testtag")
+{
+    if(!player)
+        return;
+    SetClanTag(player, "VIP GOLD CUAIE");
+}
+
 CON_COMMAND_F(vip_gold_reload, "reloads list of vip players", FCVAR_NONE)
 {
 	g_VipPlayers.clear();
