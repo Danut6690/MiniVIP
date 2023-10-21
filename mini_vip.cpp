@@ -68,7 +68,7 @@ bool VIPGold::Load(PluginId id, ISmmAPI* ismm, char* error, size_t maxlen, bool 
 
 	if (!g_MiniVIP.LoadVips(error, maxlen))
 	{
-		ConColorMsg(Color(255, 0, 0, 255), "[%s] %s\n", GetLogTag(), error);
+		ConColorMsg(Color(255, 0, 0, 255), "[%s] %s \n", GetLogTag(), error);
 		
 		return false;
 	}
