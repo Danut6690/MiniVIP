@@ -15,7 +15,7 @@
  */
 
 #include <stdio.h>
-#include "mini_vip.h"
+#include "vip_silver.h"
 #include "metamod_oslink.h"
 #include "utils.hpp"
 #include <utlstring.h>
